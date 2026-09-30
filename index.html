@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Calculadora de instalación y montaje para presupuestos." />
+    <title>Calculadora de Instalación y montaje</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <h1>Calculadora de Instalación y montaje</h1>
+        </div>
+
+        <div class="top-actions">
+          <button class="icon-button" id="resetButton" type="button" title="Reiniciar cálculo">
+            <span aria-hidden="true">↻</span>
+            <span class="sr-only">Reiniciar cálculo</span>
+          </button>
+          <button class="primary-button" id="exportButton" type="button">Exportar CSV</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <section class="panel calculator-panel" aria-labelledby="detail-title">
+          <div class="panel-header detail-header">
+            <div>
+              <p class="section-kicker">Precios netos</p>
+              <h2 id="detail-title">Ítems del presupuesto</h2>
+            </div>
+            <button class="secondary-button" id="addRowButton" type="button">+ Agregar extra</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ítem</th>
+                  <th>Cantidad</th>
+                  <th>Precio neto</th>
+                  <th>Subtotal neto</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="itemRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <aside class="summary" aria-label="Resumen del cálculo">
+          <div class="summary-grid">
+            <div class="summary-card">
+              <span>Ítems y extras</span>
+              <strong id="equipmentCost">$0</strong>
+            </div>
+            <div class="summary-card">
+              <div class="project-difficulty">
+                <span>Dificultad / distancia</span>
+                <fieldset class="difficulty-options">
+                  <legend class="sr-only">Monto por dificultad o distancia</legend>
+                  <label class="difficulty-option">
+                    <input type="radio" name="projectDifficulty" value="200000" checked />
+                    <span>$200.000</span>
+                  </label>
+                  <label class="difficulty-option">
+                    <input type="radio" name="projectDifficulty" value="300000" />
+                    <span>$300.000</span>
+                  </label>
+                  <label class="difficulty-option">
+                    <input type="radio" name="projectDifficulty" value="400000" />
+                    <span>$400.000</span>
+                  </label>
+                  <div class="custom-difficulty-row">
+                    <label class="difficulty-option">
+                      <input type="radio" name="projectDifficulty" value="custom" />
+                      <span>Otro monto</span>
+                    </label>
+                    <span class="custom-amount-field">
+                      <span aria-hidden="true">$</span>
+                      <input
+                        id="customDifficulty"
+                        type="number"
+                        min="1000"
+                        step="1000"
+                        value="200000"
+                        aria-label="Monto personalizado de dificultad"
+                        disabled
+                      />
+                    </span>
+                  </div>
+                </fieldset>
+              </div>
+              <strong id="difficultyCost">$0</strong>
+            </div>
+            <div class="summary-card emphasized-summary">
+              <span>Total neto</span>
+              <strong id="netTotal">$0</strong>
+            </div>
+            <div class="summary-card">
+              <div class="inline-field">
+                <span>IVA</span>
+                <span class="vat-rate">19%</span>
+              </div>
+              <strong id="vatCost">$0</strong>
+            </div>
+          </div>
+
+          <div class="summary-card total-card">
+            <span>Total con IVA</span>
+            <strong id="grandTotal">$0</strong>
+          </div>
+
+          <div class="summary-note">
+            <span id="totalUnits">0 unidades</span>
+            <span>Valores en CLP</span>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <template id="rowTemplate">
+      <tr>
+        <td data-label="Ítem">
+          <span class="item-name"></span>
+          <input class="extra-name-input" type="text" placeholder="Descripción del extra" hidden />
+        </td>
+        <td data-label="Cantidad">
+          <input class="quantity-input" type="number" min="0" step="1" value="0" />
+        </td>
+        <td data-label="Precio neto">
+          <output class="price-output">$0</output>
+          <input class="extra-price-input" type="number" min="0" step="1000" value="0" hidden />
+        </td>
+        <td data-label="Subtotal neto"><output class="subtotal-output">$0</output></td>
+        <td class="row-action">
+          <button class="delete-button" type="button" title="Eliminar ítem">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Eliminar ítem</span>
+          </button>
+        </td>
+      </tr>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
