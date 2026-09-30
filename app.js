@@ -6,7 +6,7 @@ const DEFAULT_ROWS = [
     quantity: 0,
     unitPrice: 140000,
   },
-  { type: "catalog", name: "Boiler", quantity: 0, unitPrice: 300000 },
+  { type: "catalog", name: "Boiler / Estanque", quantity: 0, unitPrice: 300000 },
 ];
 
 const VAT_RATE = 0.19;
