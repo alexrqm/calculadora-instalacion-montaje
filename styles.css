@@ -70,6 +70,18 @@ button {
   gap: 16px;
 }
 
+.brand-logo {
+  display: block;
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+
 h1,
 h2 {
   margin: 0;
@@ -474,6 +486,11 @@ tbody tr:last-child td {
 @media (max-width: 640px) {
   .brand {
     align-items: flex-start;
+  }
+
+  .brand-logo {
+    width: 60px;
+    height: 60px;
   }
 
   .panel-header {
