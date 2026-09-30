@@ -4,7 +4,7 @@ Calculadora estática de instalación y montaje por ítem para presupuestos. Fun
 
 ## Valores configurados
 
-- Caldera: $250.000 neto.
+- Caldera: $500.000 neto.
 - Radiador / Secatoalla: $140.000 neto.
 - Boiler: $300.000 neto.
 - Dificultad / distancia obligatoria por proyecto: $200.000, $300.000, $400.000 o un monto personalizado.

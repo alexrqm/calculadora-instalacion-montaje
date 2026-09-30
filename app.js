@@ -1,5 +1,5 @@
 const DEFAULT_ROWS = [
-  { type: "catalog", name: "Caldera", quantity: 0, unitPrice: 250000 },
+  { type: "catalog", name: "Caldera", quantity: 0, unitPrice: 500000 },
   {
     type: "catalog",
     name: "Radiador / Secatoalla",
