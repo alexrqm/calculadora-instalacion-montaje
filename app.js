@@ -49,7 +49,7 @@ function formatMoney(value) {
 function selectedDifficulty() {
   const selected = elements.difficultyOptions.find((option) => option.checked);
   if (selected?.value === "custom") {
-    return Math.max(1000, toNumber(elements.customDifficulty.value));
+    return Math.max(0, toNumber(elements.customDifficulty.value));
   }
   return Math.max(0, toNumber(selected?.value));
 }
@@ -173,10 +173,10 @@ function addExtra() {
 function reset() {
   state.rows = DEFAULT_ROWS.map((row) => ({ ...row }));
   elements.difficultyOptions.forEach((option) => {
-    option.checked = option.value === "200000";
+    option.checked = option.value === "custom";
   });
-  elements.customDifficulty.value = 200000;
-  elements.customDifficulty.disabled = true;
+  elements.customDifficulty.value = 0;
+  elements.customDifficulty.disabled = false;
   update();
 }
 

@@ -23,10 +23,6 @@
         </div>
 
         <div class="top-actions">
-          <button class="icon-button" id="resetButton" type="button" title="Reiniciar cálculo">
-            <span aria-hidden="true">↻</span>
-            <span class="sr-only">Reiniciar cálculo</span>
-          </button>
           <button class="primary-button" id="exportButton" type="button">Exportar CSV</button>
         </div>
       </header>
@@ -38,7 +34,12 @@
               <p class="section-kicker">Precios netos</p>
               <h2 id="detail-title">Ítems del presupuesto</h2>
             </div>
-            <button class="secondary-button" id="addRowButton" type="button">+ Agregar extra</button>
+            <div class="panel-actions">
+              <button class="secondary-button reset-zero-button" id="resetButton" type="button">
+                Poner en cero
+              </button>
+              <button class="secondary-button" id="addRowButton" type="button">+ Agregar extra</button>
+            </div>
           </div>
 
           <div class="table-wrap">
@@ -90,7 +91,7 @@
                       <input
                         id="customDifficulty"
                         type="number"
-                        min="1000"
+                        min="0"
                         step="1000"
                         value="200000"
                         aria-label="Monto personalizado de dificultad"
@@ -103,7 +104,7 @@
               <strong id="difficultyCost">$0</strong>
             </div>
             <div class="summary-card emphasized-summary">
-              <span>Total neto</span>
+              <span>TOTAL NETO</span>
               <strong id="netTotal">$0</strong>
             </div>
             <div class="summary-card">

@@ -186,6 +186,22 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.reset-zero-button {
+  color: #fff;
+  background: #0b2829;
+  border: 1px solid #1b5654;
+}
+
+.reset-zero-button:hover {
+  background: #113a3a;
+}
+
 input,
 select {
   width: 100%;
@@ -330,7 +346,18 @@ tbody tr:last-child td {
 }
 
 .emphasized-summary {
+  color: #fff;
+  background: #0b2829;
+  border-color: #1b5654;
   border-left: 3px solid var(--accent);
+}
+
+.emphasized-summary span {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.emphasized-summary strong {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
 }
 
 .inline-field {
@@ -495,6 +522,10 @@ tbody tr:last-child td {
 
   .panel-header {
     align-items: stretch;
+    flex-direction: column;
+  }
+
+  .panel-actions {
     flex-direction: column;
   }
 
