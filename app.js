@@ -1,18 +1,20 @@
 const DEFAULT_ROWS = [
-  { type: "catalog", name: "Caldera", quantity: 0, unitPrice: 500000 },
+  { type: "catalog", name: "Caldera", quantity: 0, unitPrice: 500000, longDistancePrice: 600000 },
   {
     type: "catalog",
     name: "Radiador / Secatoalla",
     quantity: 0,
     unitPrice: 140000,
+    longDistancePrice: 160000,
   },
-  { type: "catalog", name: "Boiler / Estanque", quantity: 0, unitPrice: 300000 },
+  { type: "catalog", name: "Boiler / Estanque", quantity: 0, unitPrice: 300000, longDistancePrice: 380000 },
 ];
 
 const VAT_RATE = 0.19;
 
 const state = {
   rows: DEFAULT_ROWS.map((row) => ({ ...row })),
+  longDistance: false,
 };
 
 const elements = {
@@ -22,6 +24,7 @@ const elements = {
   customDifficulty: document.querySelector("#customDifficulty"),
   addRowButton: document.querySelector("#addRowButton"),
   resetButton: document.querySelector("#resetButton"),
+  longDistance: document.querySelector("#longDistance"),
   exportButton: document.querySelector("#exportButton"),
   equipmentCost: document.querySelector("#equipmentCost"),
   difficultyCost: document.querySelector("#difficultyCost"),
@@ -54,9 +57,15 @@ function selectedDifficulty() {
   return Math.max(0, toNumber(selected?.value));
 }
 
+function unitPriceFor(row) {
+  return state.longDistance && row.type === "catalog"
+    ? row.longDistancePrice
+    : row.unitPrice;
+}
+
 function rowTotals(row) {
   const quantity = Math.max(0, toNumber(row.quantity));
-  const unitPrice = Math.max(0, toNumber(row.unitPrice));
+  const unitPrice = Math.max(0, toNumber(unitPriceFor(row)));
 
   return {
     equipment: unitPrice * quantity,
@@ -95,7 +104,7 @@ function renderSummary() {
 }
 
 function refreshRow(tr, row) {
-  tr.querySelector(".price-output").value = formatMoney(row.unitPrice);
+  tr.querySelector(".price-output").value = formatMoney(unitPriceFor(row));
   tr.querySelector(".subtotal-output").value = formatMoney(rowTotals(row).total);
 }
 
@@ -155,6 +164,7 @@ function renderRows() {
 }
 
 function update() {
+  elements.longDistance.checked = state.longDistance;
   renderRows();
   renderSummary();
 }
@@ -172,6 +182,7 @@ function addExtra() {
 
 function reset() {
   state.rows = DEFAULT_ROWS.map((row) => ({ ...row }));
+  state.longDistance = false;
   elements.difficultyOptions.forEach((option) => {
     option.checked = option.value === "custom";
   });
@@ -187,10 +198,11 @@ function exportCsv() {
     ...state.rows.map((row) => [
       row.name || "Extra",
       row.quantity,
-      row.unitPrice,
+      unitPriceFor(row),
       Math.round(rowTotals(row).total),
     ]),
     [],
+    ["Distancia mayor a 120 km", state.longDistance ? "Sí" : "No"],
     ["Equipos y extras", Math.round(totals.equipment)],
     ["Dificultad/Distancia", Math.round(totals.difficulty)],
     ["Total neto", Math.round(totals.net)],
@@ -215,6 +227,10 @@ function exportCsv() {
 elements.addRowButton.addEventListener("click", addExtra);
 elements.resetButton.addEventListener("click", reset);
 elements.exportButton.addEventListener("click", exportCsv);
+elements.longDistance.addEventListener("change", () => {
+  state.longDistance = elements.longDistance.checked;
+  update();
+});
 elements.difficultyOptions.forEach((option) => {
   option.addEventListener("change", () => {
     const usesCustomAmount = option.checked && option.value === "custom";
