@@ -196,25 +196,74 @@ h2 {
 }
 
 .distance-option {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-height: 40px;
   padding: 0 10px;
-  color: var(--ink);
+  color: var(--muted);
+  border-radius: var(--radius);
   font-size: 0.86rem;
   font-weight: 600;
   cursor: pointer;
 }
 
+.distance-option:hover {
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
 .distance-option input {
-  width: 18px;
-  height: 18px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   min-height: 0;
-  flex: 0 0 auto;
   padding: 0;
   margin: 0;
-  accent-color: var(--accent);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.distance-track {
+  width: 36px;
+  height: 22px;
+  flex: 0 0 auto;
+  padding: 3px;
+  background: var(--line);
+  border-radius: 999px;
+  transition: background 160ms ease;
+}
+
+.distance-track::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: var(--ink);
+  border-radius: 50%;
+  transition: transform 160ms ease;
+}
+
+.distance-option input:checked + .distance-track {
+  background: var(--accent);
+}
+
+.distance-option input:checked + .distance-track::after {
+  transform: translateX(14px);
+}
+
+.distance-option input:focus-visible + .distance-track {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .distance-track,
+  .distance-track::after {
+    transition: none;
+  }
 }
 
 .reset-zero-button {

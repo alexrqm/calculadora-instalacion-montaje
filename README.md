@@ -20,3 +20,5 @@ Calculadora estática de instalación y montaje por ítem para presupuestos. Fun
 5. Elige la rama principal y la carpeta `/root`, y guarda los cambios.
 
 Los tres ítems principales permanecen siempre visibles y parten con cantidad cero. También se pueden agregar extras excepcionales con descripción y precio editables, reiniciar el presupuesto y exportar el detalle a CSV.
+
+Al modificar `styles.css` o `app.js`, actualiza el parámetro `v` de sus enlaces en `index.html` para que el navegador descargue la nueva versión.
